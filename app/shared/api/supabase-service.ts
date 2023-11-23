@@ -1,6 +1,6 @@
-import { Event } from "@/app/src/types/Event";
-import { supabase } from "@/supabase";
-import Session from "@/app/session";
+import { Event } from "../../shared/types/Event";
+import { supabase } from "../../../supabase";
+import Session from "../../session";
 
 export default class SupabaseService {
   public static async addUser(user: any) {

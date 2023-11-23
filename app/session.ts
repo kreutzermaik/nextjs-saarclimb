@@ -1,6 +1,6 @@
 import { AuthSession, AuthUser } from "@supabase/supabase-js";
 import { supabase } from "@/supabase";
-import { User } from "@/app/src/types/User";
+import { User } from "@/app/shared/types/User";
 
 export default class Session {
   private static session: AuthSession;
