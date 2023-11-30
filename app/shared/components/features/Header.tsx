@@ -26,8 +26,6 @@ export default function Header(props: HeaderProps) {
     }
 
     useEffect(() => {
-        console.log("*** store ***")
-        console.log(store)
         // store.setIsLoggedIn(true);
         // checkUserImage().then(() => {});
     }, [store]);
