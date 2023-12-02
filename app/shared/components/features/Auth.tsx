@@ -9,7 +9,8 @@ import {supabase} from "@/supabase";
 import Toast from "../ui/Toast";
 import SupabaseService from "../../api/supabase-service";
 import Session from "@/app/session";
-import {useStore} from "@/app/store";
+import {useDispatch} from "react-redux";
+import {login, setUserImage,} from "@/app/userSlicer";
 
 type AuthProps = {
     type: string
@@ -18,14 +19,11 @@ type AuthProps = {
 export default function Auth(props: AuthProps) {
 
     const router = useRouter();
+    const dispatch = useDispatch();
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    const {isLoggedIn, setIsLoggedIn} = useStore();
-    const {userImage, setUserImage} = useStore();
-
 
     /**
      * register with email and password
@@ -47,7 +45,6 @@ export default function Auth(props: AuthProps) {
         }
 
         await SupabaseService.addUser({uid: data.user?.id, email: data.user?.email, name: name, avatar_url: ''});
-        console.log("init user data")
         await initUserData();
 
         new Toast().push({content: Toast.REGISTERED_MESSAGE, style: 'success', duration: 3000});
@@ -74,7 +71,7 @@ export default function Auth(props: AuthProps) {
             return;
         }
 
-        setIsLoggedIn(true);
+        dispatch(login());
 
         router.push('/');
     }
@@ -84,14 +81,14 @@ export default function Auth(props: AuthProps) {
      */
     async function initUserData() {
         if (await Session.getCurrentUser()) {
-            if ((await Session.getCurrentUser()).name === undefined) {
+            if ((await Session.getCurrentUser())?.name === undefined) {
                 await Session.updateUserInSession(JSON.parse(Cache.getCacheItem("username")));
             }
         }
         await addAvatar();
         await addPlan();
         await initUserPoints();
-        setIsLoggedIn(true);
+        dispatch(login());
     }
 
     /**
@@ -126,7 +123,7 @@ export default function Auth(props: AuthProps) {
     async function updateAvatarUrlInCache() {
         let url = (await SupabaseService.getAvatar()).data?.signedUrl;
         if (url) {
-            setUserImage(url);
+            dispatch(setUserImage(url));
             await updateUserWithAvatarUrl(url);
         }
     }

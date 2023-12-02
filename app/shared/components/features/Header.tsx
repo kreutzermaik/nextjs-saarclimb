@@ -1,10 +1,12 @@
 "use client";
 
+import {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
-import Link from "next/link";
-import {useEffect, useState, useContext} from "react";
+import {useStore} from "@/app/store";
 import SupabaseService from "../../api/supabase-service";
-import { MobXProviderContext } from 'mobx-react';
+import Link from "next/link";
+import {useSelector} from "react-redux";
+
 
 type HeaderProps = {
     text: string;
@@ -12,37 +14,46 @@ type HeaderProps = {
 
 export default function Header(props: HeaderProps) {
 
-    const { store } = useContext(MobXProviderContext);
-    const [avatar, setAvatar] = useState("https://ybeongwjjfdkgizzkmsc.supabase.co/storage/v1/object/sign/avatars/6bb150d3-7d2a-4c6f-b99a-aa0932f31d54?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdmF0YXJzLzZiYjE1MGQzLTdkMmEtNGM2Zi1iOTlhLWFhMDkzMmYzMWQ1NCIsImlhdCI6MTY5MzkwMDY0OCwiZXhwIjoxNzI1NDM2NjQ4fQ.zdBgGQCJTpG2-w69Az8qrgFdaf_ae_YUXRRA32mTyyE&t=2023-09-05T07%3A57%3A28.836Z");
+    const userStore = useSelector((state: any) => state.user);
     const router = useRouter();
+    const [avatar, setAvatar] = useState("");
 
+    const {isLoggedIn, setIsLoggedIn} = useStore();
+    const {userImage, setUserImage} = useStore();
+
+    /**
+     * check if user has avatar in store
+     */
     async function checkUserImage() {
-        if (store.userImage) {
-            setAvatar(store.userImage);
-        } else if (!store.userImage && store.isLoggedIn) {
+        if (userImage) {
+            setAvatar(userImage);
+        } else if (!userImage && isLoggedIn) {
             setAvatar((await SupabaseService.getCurrentAvatarUrl()).avatar_url?.avatar_url);
-            store.setUserImage(avatar);
+            setUserImage(avatar);
         }
     }
 
     useEffect(() => {
-        // store.setIsLoggedIn(true);
-        // checkUserImage().then(() => {});
-    }, [store]);
+        setIsLoggedIn(userStore.isLoggedIn);
+        checkUserImage().then();
+    }, [isLoggedIn]);
 
     return (
         <main className="bg-white mb-6">
             <div className="p-4 rounded-lg flex justify-between">
 
-{/*                {
-                    store.isLoggedIn ??
-                    <button onClick={() => router.push("/profile")}>
-                        <div
-                            className={'w-6 h-6 userImage'}
-                            style={{backgroundImage: `url(${avatar})`}}
-                        />
-                    </button>
-                }*/}
+                {
+                    avatar && isLoggedIn
+                        ?
+                        <button onClick={() => router.push("/profile")}>
+                            <div
+                                className={'w-6 h-6 userImage'}
+                                style={{backgroundImage: `url(${avatar})`}}
+                            />
+                        </button>
+                        : <p></p>
+                }
+
                 <h1 className="text-primary text-xl uppercase mx-auto">{props.text}</h1>
                 <Link href="/settings">
                     <svg

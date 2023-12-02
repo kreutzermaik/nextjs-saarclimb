@@ -5,13 +5,16 @@ import Footer from './shared/components/features/Footer'
 import Header from './shared/components/features/Header'
 import {useStore} from '@/app/store';
 import Calendar from "@/app/shared/components/features/Calendar";
+import NotLoggedIn from "@/app/shared/components/ui/NotLoggedIn";
+import {useSelector} from "react-redux";
 
 export default function Home() {
 
     const {isLoggedIn, setIsLoggedIn} = useStore();
+    const userStore = useSelector((state: any) => state.user);
 
     useEffect(() => {
-        setIsLoggedIn(true);
+        console.log(userStore.isLoggedIn)
     });
 
 
@@ -19,23 +22,14 @@ export default function Home() {
         <main className="text-center mx-auto text-gray-700 mb-20">
             <Header text={"Dashboard"}/>
 
-{/*            <div>
-                { isLoggedIn ?
-                    <p>isLoggedIn: {isLoggedIn.toString()}</p>
-                    :
-                    <p>Loading...</p>
-                }
-            </div>*/}
-
-            <div className="card card-compact shadow-xl bg-white">
-                <div className="card-body">
-                    <Calendar />
+            {userStore.isLoggedIn ?
+                <div className="card card-compact shadow-xl bg-white">
+                    <div className="card-body">
+                        <Calendar/>
+                    </div>
                 </div>
-            </div>
-
-            <button onClick={() => setIsLoggedIn(false)}>
-                Logout
-            </button>
+                : <NotLoggedIn />
+            }
 
             <Footer/>
         </main>

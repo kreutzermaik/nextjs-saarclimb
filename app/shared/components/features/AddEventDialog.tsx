@@ -102,7 +102,7 @@ export default function AddEventDialog(props: AddEventDialogProps) {
                                                 </label>
                                                 <input
                                                     name="date"
-                                                    datepicker-autohide
+                                                    datepicker-autohide="true"
                                                     type="text"
                                                     onChange={(e: any) => {
                                                         setDate(e.target.value);
@@ -139,6 +139,7 @@ export default function AddEventDialog(props: AddEventDialogProps) {
                                                 </label>
                                                 <select
                                                     id="gyms"
+                                                    value="Bitte auswählen..."
                                                     onChange={(e: any) => {
                                                         setLocation(e.target.value);
                                                     }}
