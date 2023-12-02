@@ -7,6 +7,7 @@ import {useStore} from '@/app/store';
 import Calendar from "@/app/shared/components/features/Calendar";
 import NotLoggedIn from "@/app/shared/components/ui/NotLoggedIn";
 import {useSelector} from "react-redux";
+import PlanerCompact from "@/app/shared/components/features/PlanerCompact";
 
 export default function Home() {
 
@@ -23,13 +24,19 @@ export default function Home() {
             <Header text={"Dashboard"}/>
 
             {userStore.isLoggedIn ?
-                <div className="card card-compact shadow-xl bg-white">
-                    <div className="card-body">
-                        <Calendar/>
+                <div>
+                    <PlanerCompact/>
+                    <br/>
+
+                    <div className="card card-compact shadow-xl bg-white">
+                        <div className="card-body">
+                            <Calendar/>
+                        </div>
                     </div>
                 </div>
-                : <NotLoggedIn />
+                : <NotLoggedIn/>
             }
+
 
             <Footer/>
         </main>
