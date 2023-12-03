@@ -1,6 +1,5 @@
 "use client";
 
-import {useEffect} from 'react';
 import Footer from './shared/components/features/Footer'
 import Header from './shared/components/features/Header'
 import {useStore} from '@/app/store';
@@ -13,11 +12,6 @@ export default function Home() {
 
     const {isLoggedIn, setIsLoggedIn} = useStore();
     const userStore = useSelector((state: any) => state.user);
-
-    useEffect(() => {
-        console.log(userStore.isLoggedIn)
-    });
-
 
     return (
         <main className="text-center mx-auto text-gray-700 mb-20">

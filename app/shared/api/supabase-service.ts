@@ -84,7 +84,7 @@ export default class SupabaseService {
   public static async updatePlan(plan: any) {
     const { data, error } = await supabase
       .from("planer")
-      .update({ plan: plan() })
+      .update({ plan: plan })
       .eq("uid", await Session.getCurrentUserId());
   }
 

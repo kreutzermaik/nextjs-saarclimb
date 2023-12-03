@@ -53,7 +53,8 @@ export default function PlanerCompact() {
     async function updateCalendar(item: Plan) {
         let event = item.value;
         let date = getClickedDay(item.day);
-        setNewEvent({
+
+        setNewEvent({ // @ts-ignore
             title: event,
             date: date,
             userid: await Session.getCurrentUserId(),
@@ -64,8 +65,11 @@ export default function PlanerCompact() {
             if (item.checked) openDialog();
             await SupabaseService.removeEventByDate(event, date);
         } else {
-            if (item.checked) await SupabaseService.addEvent(newEvent);
+            if (item.checked) { // @ts-ignore
+                await SupabaseService.addEvent(newEvent);
+            }
             else {
+                // @ts-ignore
                 await SupabaseService.removeEvent(newEvent);
             }
         }
