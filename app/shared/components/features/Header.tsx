@@ -32,9 +32,8 @@ export default function Header(props: HeaderProps) {
     }
 
     useEffect(() => {
-        dispatch(login(userStore.isLoggedIn));
-        checkUserImage().then();
-    }, [userStore.isLoggedIn]);
+        checkUserImage();
+    }, []);
 
     return (
         <main className="bg-white mb-6">

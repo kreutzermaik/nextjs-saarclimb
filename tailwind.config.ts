@@ -18,6 +18,7 @@ const config: Config = {
             'custom-blue': '#1b7abd',
             'custom-black': '#000',
             'custom-turquiose': 'lightseagreen',
+            'custom-pink': '#B30089',
             'custom-gold': '#FFD700',
             'custom-silver': '#C0C0C0',
             'custom-bronze': '#CD7F32',

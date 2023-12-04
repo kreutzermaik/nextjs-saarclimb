@@ -1,23 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit'
-import SupabaseService from './shared/api/supabase-service';
+"use client";
+
+import {createSlice} from '@reduxjs/toolkit'
+import {Gym} from './shared/types/Gym';
 
 const initialState = {
     isLoggedIn: false,
     userImage: "",
-    userPoints: calculateSummedPoints(),
-}
-
-async function calculateSummedPoints(): Promise<number> {
-    let summedPoints: number = 0;
-    const pointsArray = (await SupabaseService.getCurrentPoints())?.points?.points;
-    if (pointsArray !== null && pointsArray !== undefined) {
-        pointsArray.map((item: any) => {
-            summedPoints += item.value;
-        });
-    } else {
-        summedPoints = 0;
-    }
-    return summedPoints;
+    userPoints: 0,
+    currentGym: {} as Gym,
 }
 
 export const userSlice = createSlice({
@@ -36,6 +26,9 @@ export const userSlice = createSlice({
         setUserPoints: (state, action) => {
             state.userPoints = action.payload
         },
+        setCurrentGym: (state, action) => {
+            state.currentGym = action.payload
+        },
     },
 })
 
@@ -43,8 +36,9 @@ export const userSlice = createSlice({
 export const {
     login,
     logout,
-    setUserImage ,
+    setUserImage,
     setUserPoints,
+    setCurrentGym
 } = userSlice.actions
 
 export default userSlice.reducer

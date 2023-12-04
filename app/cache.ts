@@ -33,16 +33,4 @@ export default class Cache {
             window.localStorage.removeItem(item);
         }
     }
-
-    /**
-     * remove all items from cache
-     */
-    static clearOnLogout() {
-        if (typeof window !== "undefined") {
-            // setUserImage("");
-            // setUserPoints(0);
-            // setIsLoggedIn(false);
-            // setCurrentGym();
-        }
-    }
 }
