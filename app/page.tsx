@@ -6,16 +6,22 @@ import Calendar from "@/app/shared/components/features/Calendar";
 import NotLoggedIn from "@/app/shared/components/ui/NotLoggedIn";
 import {useSelector} from "react-redux";
 import PlanerCompact from "@/app/shared/components/features/PlanerCompact";
+import {useState, useEffect} from 'react'
 
 export default function Home() {
 
-    const userStore = useSelector((state: any) => state.user);
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const userStore = useSelector((state: any) => state.user)
+
+    useEffect(() => {
+        setIsLoggedIn(userStore.isLoggedIn)
+    }, [])
 
     return (
         <main className="text-center mx-auto text-gray-700 mb-20">
             <Header text={"Dashboard"}/>
 
-            {userStore.isLoggedIn ?
+            {isLoggedIn ?
                 <div>
                     <PlanerCompact/>
                     <br/>

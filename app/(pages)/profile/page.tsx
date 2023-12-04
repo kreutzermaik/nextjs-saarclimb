@@ -20,6 +20,7 @@ export default function Profile() {
     const dispatch = useDispatch();
     const userStore = useSelector((state: any) => state.user);
 
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [user, setUser] = useState<User>();
     const [finishedEvents, setFinishedEvents] = useState<number>();
     const [avatar, setAvatar] = useState("");
@@ -129,6 +130,7 @@ export default function Profile() {
             }
             await fetchEventsCount();
         }
+        setIsLoggedIn(userStore.isLoggedIn)
         fetchData();
         checkUserImage()
     }, []);
@@ -138,7 +140,7 @@ export default function Profile() {
             <Header text={"Profil"}/>
 
             {
-                userStore.isLoggedIn ?
+                isLoggedIn ?
                     user ?
                         <div>
                             <div

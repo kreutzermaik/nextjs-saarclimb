@@ -106,7 +106,7 @@ export default function ProgressCard() {
      * @param event
      * @param grade
      */
-    async function updateProgress(value: number, grade: string, currentItem: ProgressItem) {
+    async function updateProgress(value: number, grade: string) {
         progress.map((item: Progress) => {
             if (item.gymid === userStore.currentGym.id) {
                 // @ts-ignore
@@ -116,8 +116,7 @@ export default function ProgressCard() {
 
         await SupabaseService.updateProgress(
             // @ts-ignore
-            progress.find((item: Progress) => item.gymid === userStore.currentGym.id)
-                .progress, userStore.currentGym.id
+            progress.find((item: Progress) => item.gymid === userStore.currentGym.id)?.progress, userStore.currentGym.id
         );
 
         let currentUserPointsArray = await SupabaseService.getCurrentPoints();
@@ -160,7 +159,7 @@ export default function ProgressCard() {
         const newValue = Number(item.value) + 1;
         let inputElement: any = document.getElementById(`input-${item.grade}`);
         inputElement.value = newValue;
-        updateProgress(newValue, item.grade, item);
+        updateProgress(newValue, item.grade);
     }
 
     /**
@@ -172,7 +171,7 @@ export default function ProgressCard() {
         let inputElement: any = document.getElementById(`input-${item.grade}`);
         if (newValue >= 0) {
             inputElement.value = newValue;
-            updateProgress(newValue, item.grade, item);
+            updateProgress(newValue, item.grade);
         }
     }
 
@@ -254,53 +253,52 @@ export default function ProgressCard() {
     }, []);
 
     return (
-        userStore.isLoggedIn ?
-            <div className="card card-compact shadow-xl bg-white text-left mb-20">
-                <div className="card-body">
-                    <h2 className="card-title">Boulderhalle auswählen</h2>
-                    <label
-                        htmlFor={"gyms"}
-                        className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
-                    >
-                        Aktuelle Halle
-                    </label>
-                    <select
-                        id="gyms"
-                        onChange={(e: any) => {
-                            changeGym(e.target.value);
-                        }}
-                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    >
-                        <option selected>
-                            {userStore.currentGym ? userStore.currentGym.name : "Bitte auswählen..."}
-                        </option>
-                        {gyms
-                            ? gyms.map((gym: Gym) => {
-                                if (userStore.currentGym && gym.name !== userStore.currentGym.name)
-                                    return <option value={gym.name}>{gym.name}</option>
-                            })
-                            : ''}
-                    </select>
+        <div className="card card-compact shadow-xl bg-white text-left mb-20">
+            <div className="card-body">
+                <h2 className="card-title">Boulderhalle auswählen</h2>
+                <label
+                    htmlFor={"gyms"}
+                    className="block mb-2 text-sm text-left font-medium text-gray-900 dark:text-white"
+                >
+                    Aktuelle Halle
+                </label>
+                <select
+                    id="gyms"
+                    onChange={(e: any) => {
+                        changeGym(e.target.value);
+                    }}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                >
+                    <option selected>
+                        {userStore.currentGym ? userStore.currentGym.name : "Bitte auswählen..."}
+                    </option>
+                    {gyms
+                        ? gyms.map((gym: Gym) => {
+                            if (userStore.currentGym && gym.name !== userStore.currentGym.name)
+                                return <option value={gym.name}>{gym.name}</option>
+                        })
+                        : ''}
+                </select>
 
-                    <br/>
+                <br/>
 
-                    {
-                        progress.length > 0 ?
-                            <table className="table table-zebra w-full shadow-md">
-                                <thead>
-                                <tr>
-                                    <th className="text-sm normal-case">Erledigte Boulder</th>
-                                    <th className="text-sm normal-case">Schwierigkeitsgrad</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {
-                                    progress.map((item: any) => {
-                                        return (
-                                            item.progress.map((item: ProgressItem) => {
-                                                return (
-                                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                                        <td className="px-3 py-2 w-2/12">
+                {
+                    progress && progress.length > 0 ?
+                        <table className="table table-zebra w-full shadow-md">
+                            <thead>
+                            <tr>
+                                <th className="text-sm normal-case">Erledigte Boulder</th>
+                                <th className="text-sm normal-case">Schwierigkeitsgrad</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {
+                                progress.map((item: any) => {
+                                    return (
+                                        item.progress.map((item: ProgressItem) => {
+                                            return (
+                                                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                    <td className="px-3 py-2 w-2/12">
                                                         <span className="minus-button">
                                                             <Button
                                                                 text="-"
@@ -314,18 +312,18 @@ export default function ProgressCard() {
                                                                 disabled={item.value <= 0}
                                                             />
                                                         </span>
-                                                            <input
-                                                                type="number"
-                                                                name="number"
-                                                                id={`input-${item.grade}`}
-                                                                min={0}
-                                                                onChange={(e: any) =>
-                                                                    updateProgress(e.target.value, item.grade, item)
-                                                                }
-                                                                value={item.value}
-                                                                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 mr-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-14 lg:w-44"
-                                                            />
-                                                            <span className="plus-button">
+                                                        <input
+                                                            type="number"
+                                                            name="number"
+                                                            id={`input-${item.grade}`}
+                                                            min={0}
+                                                            onChange={(e: any) =>
+                                                                updateProgress(e.target.value, item.grade)
+                                                            }
+                                                            value={item.value}
+                                                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 mr-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-14 lg:w-44"
+                                                        />
+                                                        <span className="plus-button">
                                                           <Button
                                                               text="+"
                                                               type="secondary"
@@ -337,33 +335,32 @@ export default function ProgressCard() {
                                                               }}
                                                           />
                                                         </span>
-                                                        </td>
-                                                        <td className="px-3 py-2 w-9/12">
-                                                            <div className="flex gap-5">
-                                                                <Chip
-                                                                    //@ts-ignore
-                                                                    text={getGymGradeValueByName(item.grade.grade)}
-                                                                    //@ts-ignore
-                                                                    color={item.grade.grade}
-                                                                />
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                );
-                                            })
-                                        )
-                                    })
-                                }
-                                </tbody>
-                            </table>
-                            : <Button
-                                text="Starte mit dieser Boulderhalle!"
-                                type="secondary"
-                                onClick={() => initProgressDataForGym(userStore.currentGym.grades)}
-                            />
-                    }
-                </div>
+                                                    </td>
+                                                    <td className="px-3 py-2 w-9/12">
+                                                        <div className="flex gap-5">
+                                                            <Chip
+                                                                //@ts-ignore
+                                                                text={getGymGradeValueByName(item.grade.grade)}
+                                                                //@ts-ignore
+                                                                color={item.grade.grade}
+                                                            />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        })
+                                    )
+                                })
+                            }
+                            </tbody>
+                        </table>
+                        : <Button
+                            text="Starte mit dieser Boulderhalle!"
+                            type="secondary"
+                            onClick={() => initProgressDataForGym(userStore.currentGym.grades)}
+                        />
+                }
             </div>
-            : <NotLoggedIn/>
+        </div>
     );
 }

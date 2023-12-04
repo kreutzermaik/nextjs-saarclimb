@@ -7,11 +7,7 @@ export const metadata: Metadata = {
     description: 'Die App für Boulderer im Saarland',
 }
 
-export default function RootLayout({
-                                       children,
-                                   }: {
-    children: React.ReactNode
-}) {
+export default function RootLayout({children}: { children: React.ReactNode }) {
     return (
         <ReduxProvider>
             <html lang="de">
