@@ -3,14 +3,19 @@
 import SupabaseService from "./shared/api/supabase-service";
 import Cache from "./cache";
 import Session from "./session";
+import {useDispatch} from "react-redux";
+import {setUserImage, login} from "./userSlicer";
 
 export default class DataProvider {
+
+  dispatch = useDispatch();
 
   /**
    * init user data that is required for the app
    */
   static async initUserData() {
     if (await Session.getCurrentUser()) {
+      // @ts-ignore
       if ((await Session.getCurrentUser()).name === undefined) {
         await Session.updateUserInSession(JSON.parse(Cache.getCacheItem("username")));
       }

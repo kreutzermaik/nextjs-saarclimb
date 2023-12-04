@@ -2,7 +2,6 @@
 
 import Footer from './shared/components/features/Footer'
 import Header from './shared/components/features/Header'
-import {useStore} from '@/app/store';
 import Calendar from "@/app/shared/components/features/Calendar";
 import NotLoggedIn from "@/app/shared/components/ui/NotLoggedIn";
 import {useSelector} from "react-redux";
@@ -10,7 +9,6 @@ import PlanerCompact from "@/app/shared/components/features/PlanerCompact";
 
 export default function Home() {
 
-    const {isLoggedIn, setIsLoggedIn} = useStore();
     const userStore = useSelector((state: any) => state.user);
 
     return (

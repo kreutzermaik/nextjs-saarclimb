@@ -2,10 +2,10 @@
 
 import {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
-import {useStore} from "@/app/store";
 import SupabaseService from "../../api/supabase-service";
 import Link from "next/link";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import {setUserImage, login} from "@/app/userSlicer";
 
 
 type HeaderProps = {
@@ -14,36 +14,34 @@ type HeaderProps = {
 
 export default function Header(props: HeaderProps) {
 
+    const dispatch = useDispatch();
     const userStore = useSelector((state: any) => state.user);
     const router = useRouter();
     const [avatar, setAvatar] = useState("");
-
-    const {isLoggedIn, setIsLoggedIn} = useStore();
-    const {userImage, setUserImage} = useStore();
 
     /**
      * check if user has avatar in store
      */
     async function checkUserImage() {
-        if (userImage) {
-            setAvatar(userImage);
-        } else if (!userImage && isLoggedIn) {
+        if (userStore.userImage) {
+            setAvatar(userStore.userImage);
+        } else if (!userStore.userImage && userStore.isLoggedIn) {
             setAvatar((await SupabaseService.getCurrentAvatarUrl()).avatar_url?.avatar_url);
-            setUserImage(avatar);
+            dispatch(setUserImage(avatar));
         }
     }
 
     useEffect(() => {
-        setIsLoggedIn(userStore.isLoggedIn);
+        dispatch(login(userStore.isLoggedIn));
         checkUserImage().then();
-    }, [isLoggedIn]);
+    }, [userStore.isLoggedIn]);
 
     return (
         <main className="bg-white mb-6">
             <div className="p-4 rounded-lg flex justify-between">
 
                 {
-                    avatar && isLoggedIn
+                    avatar && userStore.isLoggedIn
                         ?
                         <button onClick={() => router.push("/profile")}>
                             <div

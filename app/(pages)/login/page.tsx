@@ -1,6 +1,6 @@
 "use client";
 
-import Auth from "../shared/components/features/Auth";
+import Auth from "../../shared/components/features/Auth";
 
 export default function Login() {
 

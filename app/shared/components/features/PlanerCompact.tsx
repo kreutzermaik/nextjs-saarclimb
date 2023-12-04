@@ -21,8 +21,6 @@ export default function PlanerCompact() {
     const [plan, setPlans] = useState<Plan[]>([]);
     const [newEvent, setNewEvent] = useState<Event>();
 
-    let subscription: any;
-
     /**
      * fetch data from SupabaseService
      * @returns
