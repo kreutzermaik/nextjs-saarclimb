@@ -11,7 +11,6 @@ import {Chip} from "../ui/Chip";
 import {setCurrentGym} from "@/app/userSlicer";
 import {useDispatch, useSelector} from "react-redux";
 import {Subscription} from "@supabase/supabase-js";
-import NotLoggedIn from "../ui/NotLoggedIn";
 
 export default function ProgressCard() {
 
@@ -62,8 +61,10 @@ export default function ProgressCard() {
      * @returns
      */
     async function fetchProgress(gymId: number) {
+        console.log("fetching..." + gymId);
         try {
             let result = (await SupabaseService.getProgress(gymId)).progress;
+            console.log(result);
             setProgress(result as Progress[]);
             return progress;
         } catch (err: any) {
@@ -107,17 +108,32 @@ export default function ProgressCard() {
      * @param grade
      */
     async function updateProgress(value: number, grade: string) {
+        setProgress((prevProgress: Progress[]) =>
+                prevProgress && prevProgress.map((item) =>
+                    item.gymid === userStore.currentGym.id
+                        ? {
+                            ...item,
+                            progress: item.progress.map((gradeItem) =>
+                                gradeItem.grade === grade
+                                    ? {...gradeItem, value: value}
+                                    : gradeItem
+                            ),
+                        }
+                        : item
+                )
+        );
+
         progress.map((item: Progress) => {
             if (item.gymid === userStore.currentGym.id) {
                 // @ts-ignore
-                item.progress.find((item: any) => item.grade === grade).value = value;
+                item.progress.find((item: any) => item.grade === grade).value = value
             }
         });
 
         await SupabaseService.updateProgress(
-            // @ts-ignore
             progress.find((item: Progress) => item.gymid === userStore.currentGym.id)?.progress, userStore.currentGym.id
         );
+        console.log(progress.find((item: Progress) => item.gymid === userStore.currentGym.id)?.progress, userStore.currentGym.id);
 
         let currentUserPointsArray = await SupabaseService.getCurrentPoints();
         // @ts-ignore
@@ -195,7 +211,7 @@ export default function ProgressCard() {
      * on subscription update
      */
     async function onUpdate() {
-        await fetchProgress(userStore.currentGym.id);
+        // await fetchProgress(userStore.currentGym.id);
     }
 
     /**
@@ -264,18 +280,19 @@ export default function ProgressCard() {
                 </label>
                 <select
                     id="gyms"
+                    defaultValue={'DEFAULT'}
                     onChange={(e: any) => {
                         changeGym(e.target.value);
                     }}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
-                    <option selected>
+                    <option value="DEFAULT" key={userStore.currentGym}>
                         {userStore.currentGym ? userStore.currentGym.name : "Bitte auswählen..."}
                     </option>
                     {gyms
                         ? gyms.map((gym: Gym) => {
                             if (userStore.currentGym && gym.name !== userStore.currentGym.name)
-                                return <option value={gym.name}>{gym.name}</option>
+                                return <option value={gym.name} key={gym.name}>{gym.name}</option>
                         })
                         : ''}
                 </select>
@@ -295,11 +312,13 @@ export default function ProgressCard() {
                             {
                                 progress.map((item: any) => {
                                     return (
-                                        item.progress.map((item: ProgressItem) => {
+                                        item.progress.map((item: ProgressItem, index: number) => {
                                             return (
-                                                <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                                // @ts-ignore
+                                                <tr key={item.grade.grade}
+                                                    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                                     <td className="px-3 py-2 w-2/12">
-                                                        <span className="minus-button">
+                                                        <span id={`button-minus-${index}`} className="minus-button">
                                                             <Button
                                                                 text="-"
                                                                 type="secondary"
@@ -320,10 +339,14 @@ export default function ProgressCard() {
                                                             onChange={(e: any) =>
                                                                 updateProgress(e.target.value, item.grade)
                                                             }
-                                                            value={item.value}
+                                                            value={
+                                                                progress
+                                                                    .find((prog) => prog.gymid === userStore.currentGym.id)
+                                                                    ?.progress.find((gradeItem) => gradeItem.grade === item.grade)?.value || 0
+                                                            }
                                                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 mr-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-14 lg:w-44"
                                                         />
-                                                        <span className="plus-button">
+                                                        <span id={`button-plus-${index}`} className="plus-button">
                                                           <Button
                                                               text="+"
                                                               type="secondary"
