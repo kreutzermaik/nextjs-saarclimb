@@ -7,6 +7,7 @@ import NotLoggedIn from "@/app/shared/components/ui/NotLoggedIn";
 import {useSelector} from "react-redux";
 import PlanerCompact from "@/app/shared/components/features/PlanerCompact";
 import {useState, useEffect} from 'react'
+import {autoLogin} from '@/test/autoLogin';
 
 export default function Home() {
 
@@ -14,7 +15,13 @@ export default function Home() {
     const userStore = useSelector((state: any) => state.user)
 
     useEffect(() => {
-        setIsLoggedIn(userStore.isLoggedIn)
+        if (!userStore.isLoggedIn && process.env.NODE_ENV === "development") {
+            autoLogin().then(() => {
+                setIsLoggedIn(true);
+            });
+        } else {
+            setIsLoggedIn(userStore.isLoggedIn)
+        }
     }, [])
 
     return (

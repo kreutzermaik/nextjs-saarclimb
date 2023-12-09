@@ -12,7 +12,9 @@
     "test": "cypress run",
     "e2e": "cypress run",
     "ci:start-server": "npm run dev",
-    "ci:cy-run": "start-server-and-test ci:start-server http://localhost:8080 cy:run"
+    "ci:cy-run": "start-server-and-test ci:start-server http://localhost:8080 cy:run",
+    "lighthouse:run": "node ./test/performance/dashboard.js && node ./test/performance/progress.js",
+    "ci:lighthouse-run": "start-server-and-test ci:start-server http://localhost:8080 lighthouse:run"
   },
   "dependencies": {
     "@fullcalendar/core": "^6.1.4",
@@ -27,10 +29,12 @@
     "flowbite": "^1.6.3",
     "flowbite-datepicker": "^1.2.2",
     "fullcalendar": "^6.1.4",
+    "lighthouse": "^11.3.0",
     "mobx": "^6.11.0",
     "mobx-react": "^9.1.0",
     "mobx-react-lite": "^4.0.5",
     "next": "14.0.2",
+    "puppeteer": "^21.6.0",
     "react": "^18",
     "react-dom": "^18",
     "react-redux": "^8.1.3",

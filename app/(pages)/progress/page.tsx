@@ -4,6 +4,7 @@ import Footer from "@/app/shared/components/features/Footer";
 import Header from "@/app/shared/components/features/Header";
 import ProgressCard from "@/app/shared/components/features/ProgressCard";
 import NotLoggedIn from "@/app/shared/components/ui/NotLoggedIn";
+import { autoLogin } from "@/test/autoLogin";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -13,7 +14,13 @@ export default function Progress() {
     const userStore = useSelector((state: any) => state.user)
 
     useEffect(() => {
-        setIsLoggedIn(userStore.isLoggedIn)
+        if (!userStore.isLoggedIn && process.env.NODE_ENV === "development") {
+            autoLogin().then(() => {
+                setIsLoggedIn(true);
+            });
+        } else {
+            setIsLoggedIn(userStore.isLoggedIn)
+        }
     }, [])
 
     return (
