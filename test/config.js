@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 import lighthouse from "lighthouse";
-import {ReportGenerator} from "lighthouse/report/generator/report-generator.js";
+import { ReportGenerator } from "lighthouse/report/generator/report-generator.js";
 import fs from 'fs';
 
 export const BASE_URL = 'http://localhost:8080/';
@@ -17,8 +17,11 @@ const page = await browser.newPage();
  * @param {string | undefined} pageName
  */
 export async function testPerformance(pageName) {
+    // Definiere benutzerdefinierte Chrome-Flags für die Desktop-Emulation
+    const chromeFlags = ['--window-size=1920,1080'];
+
     // @ts-ignore
-    const {lhr} = await lighthouse(BASE_URL + pageName, undefined, undefined, page);
+    const { lhr } = await lighthouse(BASE_URL + pageName, { chromeFlags }, undefined, page);
     await generateReport(lhr, pageName);
 }
 
