@@ -104,7 +104,7 @@ jobs:
           cp /var/log/collectl/performance_baseline.csv temp-artifacts/
           cp /var/log/collectl/performance_idle.csv temp-artifacts/
           cp /var/log/collectl/performance_szenario.csv temp-artifacts/
-          cp -r ${{ github.workspace }}/src/test/reports/* temp-artifacts/
+          cp -r ${{ github.workspace }}/test/reports/* temp-artifacts/
 
       - name: Speichern der Ergebnisse als Artefakte
         uses: actions/upload-artifact@v3
