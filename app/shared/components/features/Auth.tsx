@@ -11,7 +11,6 @@ import SupabaseService from "../../api/supabase-service";
 import Session from "@/app/session";
 import {useDispatch} from "react-redux";
 import {login, setUserImage,} from "@/app/userSlicer";
-import NoSSR from 'react-no-ssr';
 
 type AuthProps = {
     type: string
@@ -195,7 +194,7 @@ export default function Auth(props: AuthProps) {
                                    required/>
                         </div>
                         <div id="login">
-                            <NoSSR><Button text="Einloggen" type="secondary" onClick={loginWithEmail}/></NoSSR>
+                            <Button text="Einloggen" type="secondary" onClick={loginWithEmail}/>
                         </div>
                         <hr/>
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
@@ -238,7 +237,7 @@ export default function Auth(props: AuthProps) {
                                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                    required/>
                         </div>
-                        <NoSSR><Button text="Registrieren" type="secondary" onClick={registerWithEmail}/></NoSSR>
+                        <Button text="Registrieren" type="secondary" onClick={registerWithEmail}/>
                         <hr/>
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                             Zurück zum <Link href="/login"

@@ -7,7 +7,6 @@ import {Event} from "@/app/shared/types/Event";
 import {Subscription} from "@supabase/supabase-js";
 import {LoadingSpinner} from "@/app/shared/components/ui/LoadingSpinner";
 import AddEventDialog from "@/app/shared/components/features/AddEventDialog";
-import NoSSR from 'react-no-ssr';
 
 export default function Calendar() {
 
@@ -142,11 +141,11 @@ export default function Calendar() {
                         ></div>
                     )
                     : (
-                        <NoSSR><LoadingSpinner/></NoSSR>
+                        <LoadingSpinner/>
                     )
 
             }
-            <NoSSR><AddEventDialog date={selectedDate} /></NoSSR>
+             <AddEventDialog date={selectedDate} />
         </main>
     )
 }

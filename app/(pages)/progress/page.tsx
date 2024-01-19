@@ -7,7 +7,6 @@ import NotLoggedIn from "@/app/shared/components/ui/NotLoggedIn";
 import { autoLogin } from "@/test/autoLogin";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import NoSSR from 'react-no-ssr';
 
 export default function Progress() {
 
@@ -26,12 +25,12 @@ export default function Progress() {
 
     return (
         <main className="text-center text-gray-700">
-            <NoSSR><Header text="Fortschritt"/></NoSSR>
+            <Header text="Fortschritt"/>
 
-            {isLoggedIn ? <NoSSR><ProgressCard/></NoSSR>
-                : <NoSSR><NotLoggedIn/></NoSSR> }
+            {isLoggedIn ? <ProgressCard/>
+                : <NotLoggedIn/> }
 
-            <NoSSR><Footer/></NoSSR>
+            <Footer/>
         </main>
     );
 }

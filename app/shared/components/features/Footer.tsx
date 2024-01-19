@@ -5,7 +5,6 @@ import {MonitorIcon} from '../ui/icons/MonitorIcon';
 import {UserGroupIcon} from '../ui/icons/UserGroupIcon';
 import {ToolIcon} from '../ui/icons/ToolIcon';
 import {DashboardIcon} from '../ui/icons/DashboardIcon';
-import NoSSR from 'react-no-ssr';
 
 export default function Footer() {
 
@@ -22,7 +21,7 @@ export default function Footer() {
                     )}`}
                     onClick={() => router.push("/")}
                 >
-                    <NoSSR><DashboardIcon/></NoSSR>
+                    <DashboardIcon/>
                     <p className="text-sm">Dashboard</p>
                 </button>
                 <button
@@ -31,7 +30,7 @@ export default function Footer() {
                     )}`}
                     onClick={() => router.push("/plan")}
                 >
-                    <NoSSR><ToolIcon/></NoSSR>
+                    <ToolIcon/>
                     <p className="text-sm">Planer</p>
                 </button>
                 <button
@@ -40,7 +39,7 @@ export default function Footer() {
                     )}`}
                     onClick={() => router.push("/progress")}
                 >
-                    <NoSSR><UserGroupIcon/></NoSSR>
+                    <UserGroupIcon/>
                     <p className="text-sm">Fortschritt</p>
                 </button>
                 <button
@@ -49,7 +48,7 @@ export default function Footer() {
                     )}`}
                     onClick={() => router.push("/board")}
                 >
-                    <NoSSR><MonitorIcon/></NoSSR>
+                    <MonitorIcon/>
                     <p className="text-sm">Ranking</p>
                 </button>
             </div>

@@ -8,7 +8,6 @@ import {TrashIcon} from "../ui/icons/TrashIcon";
 import {Button} from "../ui/Button";
 import {Subscription} from "@supabase/supabase-js";
 import {useEffect, useRef, useState} from "react";
-import NoSSR from 'react-no-ssr';
 
 export default function Planer() {
     const subscriptionRef = useRef<Subscription | null>(null);
@@ -117,21 +116,21 @@ export default function Planer() {
         );
     }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const planCache: any = Cache.getCacheItem("plan");
-            if (planCache) {
-                setPlan(JSON.parse(planCache));
-            } else {
-                const returnedValue = await fetchPlan();
-                if (returnedValue) {
-                    setPlan(returnedValue);
-                    Cache.setCacheItem("plan", returnedValue);
-                }
-            }
-        };
-        fetchData();
-    }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const planCache: any = Cache.getCacheItem("plan");
+      if (planCache) {
+        setPlan(JSON.parse(planCache));
+      } else {
+        const returnedValue = await fetchPlan();
+        if (returnedValue) {
+          setPlan(returnedValue);
+          Cache.setCacheItem("plan", returnedValue);
+        }
+      }
+    };
+    fetchData();
+  }, []);
 
 
     useEffect(() => {
@@ -165,7 +164,7 @@ export default function Planer() {
                   Durch das Reset-Symbol setzt du den Wert für ein Eingabefeld zurück.
                   Über Zurücksetzen werden alle eingegebenen Werte geleert."
                         >
-                            <NoSSR><InfoIcon/></NoSSR>
+                            <InfoIcon/>
                         </div>
 
                         <table className="table table-zebra w-full shadow-md">
@@ -216,22 +215,22 @@ export default function Planer() {
                             </tbody>
                         </table>
                     </div>
-                    : <NoSSR><LoadingSpinner/></NoSSR>
+                    : <LoadingSpinner/>
             }
 
-            <NoSSR><Button
+            <Button
                 text="Speichern"
                 type="secondary"
                 onClick={updatePlan}
                 width="w-full"
-            /></NoSSR>
-            <NoSSR><Button
+            />
+            <Button
                 text="Zurücksetzen"
                 type="secondary"
                 onClick={resetPlan}
                 outline="true"
                 width="w-full"
-            /></NoSSR>
+            />
         </main>
     );
 }

@@ -14,7 +14,6 @@ import {LoadingSpinner} from "@/app/shared/components/ui/LoadingSpinner";
 import {Button} from "@/app/shared/components/ui/Button";
 import NumberAnimation from "@/app/shared/components/ui/NumberAnimation";
 import ChartVisitedGyms from "@/app/shared/components/features/ChartVisitedGyms";
-import NoSSR from 'react-no-ssr';
 
 export default function Profile() {
 
@@ -138,7 +137,7 @@ export default function Profile() {
 
     return (
         <main className="text-center mx-auto text-gray-700 mb-20">
-            <NoSSR><Header text={"Profil"}/></NoSSR>
+            <Header text={"Profil"}/>
 
             {
                 isLoggedIn ?
@@ -220,9 +219,9 @@ export default function Profile() {
                                     {
                                         userStore.userPoints >= 0 ?
                                             <h2 className="card-title mx-auto">
-                                                <NoSSR><NumberAnimation targetValue={userStore.userPoints}/></NoSSR>
+                                                <NumberAnimation targetValue={userStore.userPoints}/>
                                             </h2>
-                                            : <NoSSR><LoadingSpinner/></NoSSR>
+                                            : <LoadingSpinner/>
                                     }
                                     <p className="py-1">Punkte gesamt</p>
                                 </div>
@@ -236,9 +235,9 @@ export default function Profile() {
                                     {
                                         finishedEvents ?
                                             <h2 className="card-title mx-auto">
-                                                <NoSSR><NumberAnimation targetValue={finishedEvents}/></NoSSR>
+                                                <NumberAnimation targetValue={finishedEvents}/>
                                             </h2>
-                                            : <NoSSR><LoadingSpinner/></NoSSR>
+                                            : <LoadingSpinner/>
                                     }
                                     <p className="py-1">Absolvierte Trainingseinheiten</p>
                                 </div>
@@ -248,15 +247,15 @@ export default function Profile() {
 
                             <div className="card card-compact shadow-xl mx-auto max-w-sm gradient-green text-white">
                                 <h2 className="card-title mx-auto py-4">Besuchte Hallen</h2>
-                                <NoSSR><ChartVisitedGyms/></NoSSR>
+                                <ChartVisitedGyms/>
                             </div>
                         </div>
-                        : <NoSSR><LoadingSpinner/></NoSSR>
+                        : <LoadingSpinner/>
                     :
-                    <NoSSR><NotLoggedIn/></NoSSR>
+                    <NotLoggedIn/>
             }
 
-            <NoSSR><Footer/></NoSSR>
+            <Footer/>
         </main>
     )
 }
