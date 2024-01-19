@@ -8,6 +8,7 @@ import {Point} from "../../types/Point";
 import {setCurrentGym} from "@/app/userSlicer";
 import {TrophyIcon} from "../ui/icons/TrophyIcon";
 import {LoadingSpinner} from "../ui/LoadingSpinner";
+import NoSSR from 'react-no-ssr';
 
 export default function LeaderBoard() {
 
@@ -240,11 +241,11 @@ export default function LeaderBoard() {
                                     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <td className="px-3 py-2 w-1/12">
                                             {i === 0 ? (
-                                                <TrophyIcon color="text-custom-gold"/>
+                                                <NoSSR><TrophyIcon color="text-custom-gold"/></NoSSR>
                                             ) : i === 1 ? (
-                                                <TrophyIcon color="text-custom-silver"/>
+                                                <NoSSR><TrophyIcon color="text-custom-silver"/></NoSSR>
                                             ) : i === 2 ? (
-                                                <TrophyIcon color="text-custom-bronze"/>
+                                                <NoSSR><TrophyIcon color="text-custom-bronze"/></NoSSR>
                                             ) : (
                                                 user.boardId
                                             )}
@@ -267,7 +268,7 @@ export default function LeaderBoard() {
                     </table>
                 </div>
             ) : (
-                <LoadingSpinner/>
+                <NoSSR><LoadingSpinner/></NoSSR>
             )}
         </div>
     )

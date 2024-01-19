@@ -11,6 +11,7 @@ import {Chip} from "../ui/Chip";
 import {setCurrentGym} from "@/app/userSlicer";
 import {useDispatch, useSelector} from "react-redux";
 import {Subscription} from "@supabase/supabase-js";
+import NoSSR from 'react-no-ssr';
 
 export default function ProgressCard() {
 
@@ -319,7 +320,7 @@ export default function ProgressCard() {
                                                     className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                                     <td className="px-3 py-2 w-2/12">
                                                         <span id={`button-minus-${index}`} className="minus-button">
-                                                            <Button
+                                                            <NoSSR><Button
                                                                 text="-"
                                                                 type="secondary"
                                                                 opacity="opacity-80"
@@ -329,7 +330,7 @@ export default function ProgressCard() {
                                                                     decrementValue(item);
                                                                 }}
                                                                 disabled={item.value <= 0}
-                                                            />
+                                                            /></NoSSR>
                                                         </span>
                                                         <input
                                                             type="number"
@@ -347,7 +348,7 @@ export default function ProgressCard() {
                                                             className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2.5 mr-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 w-14 lg:w-44"
                                                         />
                                                         <span id={`button-plus-${index}`} className="plus-button">
-                                                          <Button
+                                                          <NoSSR><Button
                                                               text="+"
                                                               type="secondary"
                                                               opacity="opacity-80"
@@ -356,17 +357,17 @@ export default function ProgressCard() {
                                                               onClick={() => {
                                                                   incrementValue(item);
                                                               }}
-                                                          />
+                                                          /></NoSSR>
                                                         </span>
                                                     </td>
                                                     <td className="px-3 py-2 w-9/12">
                                                         <div className="flex gap-5">
-                                                            <Chip
+                                                            <NoSSR><Chip
                                                                 //@ts-ignore
                                                                 text={getGymGradeValueByName(item.grade.grade)}
                                                                 //@ts-ignore
                                                                 color={item.grade.grade}
-                                                            />
+                                                            /></NoSSR>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -377,11 +378,11 @@ export default function ProgressCard() {
                             }
                             </tbody>
                         </table>
-                        : <Button
+                        : <NoSSR><Button
                             text="Starte mit dieser Boulderhalle!"
                             type="secondary"
                             onClick={() => initProgressDataForGym(userStore.currentGym.grades)}
-                        />
+                        /></NoSSR>
                 }
             </div>
         </div>

@@ -5,6 +5,7 @@ import SupabaseService from "../../api/supabase-service";
 import {Gym} from "../../types/Gym";
 import Toast from "../ui/Toast";
 import {useEffect, useState} from "react";
+import NoSSR from 'react-no-ssr';
 
 type AskLocationDialogProps = {
     newEvent: any;
@@ -115,21 +116,21 @@ export default function AskLocationDialog(props: AskLocationDialogProps) {
                             </div>
                         </div>
                         <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                            <Button
+                            <NoSSR><Button
                                 text="Speichern"
                                 type="secondary"
                                 rounded="true"
                                 width="w-full"
                                 onClick={addEvent}
-                            />
-                            <Button
+                            /></NoSSR>
+                            <NoSSR><Button
                                 text="Abbrechen"
                                 type="secondary"
                                 outline="true"
                                 rounded="true"
                                 width="w-full"
                                 onClick={closeDialog}
-                            />
+                            /></NoSSR>
                         </div>
                     </div>
                 </div>

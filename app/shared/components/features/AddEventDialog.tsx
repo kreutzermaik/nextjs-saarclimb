@@ -5,6 +5,7 @@ import {Event} from "@/app/shared/types/Event";
 import {Gym} from "@/app/shared/types/Gym";
 import Toast from "@/app/shared/components/ui/Toast";
 import {useEffect, useState} from "react";
+import NoSSR from 'react-no-ssr';
 
 type AddEventDialogProps = {
     date: any;
@@ -169,22 +170,22 @@ export default function AddEventDialog(props: AddEventDialogProps) {
                             </div>
                         </div>
                         <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                            <Button
+                            <NoSSR><Button
                                 text="Speichern"
                                 type="secondary"
                                 onClick={addEvent}
                                 rounded="true"
                                 width="w-full"
                                 disabled={!event || !props.date}
-                            />
-                            <Button
+                            /></NoSSR>
+                            <NoSSR><Button
                                 text="Abbrechen"
                                 type="secondary"
                                 onClick={closeDialog}
                                 outline="true"
                                 rounded="true"
                                 width="w-full"
-                            />
+                            /></NoSSR>
                         </div>
                     </div>
                 </div>

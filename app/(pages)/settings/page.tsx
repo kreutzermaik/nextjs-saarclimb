@@ -9,6 +9,7 @@ import Footer from "@/app/shared/components/features/Footer";
 import {useDispatch} from "react-redux";
 import {setUserImage, setUserPoints, logout, setCurrentGym} from "@/app/userSlicer";
 import { Gym } from "@/app/shared/types/Gym";
+import NoSSR from 'react-no-ssr';
 
 export default function Settings() {
 
@@ -31,7 +32,7 @@ export default function Settings() {
 
     return (
         <main className="text-center mx-auto text-gray-700">
-            <Header text="Einstellungen"/>
+            <NoSSR><Header text="Einstellungen"/></NoSSR>
 
             <div className="card card-compact shadow-xl bg-white">
                 <div className="card-body">
@@ -56,18 +57,18 @@ export default function Settings() {
                     </div>
 
                     <div className="text-left mt-2">
-                        <Button
+                        <NoSSR><Button
                             text="Ausloggen"
                             type="secondary"
                             outline="true"
                             rounded="true"
                             onClick={() => logoutAndClear()}
-                        />
+                        /></NoSSR>
                     </div>
                 </div>
             </div>
 
-            <Footer/>
+            <NoSSR><Footer/></NoSSR>
         </main>
     )
 }

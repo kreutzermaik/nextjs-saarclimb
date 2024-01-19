@@ -13,6 +13,7 @@ import {ArrowDownIcon} from "../ui/icons/ArrowDownIcon";
 import Link from "next/link";
 import AskLocationDialog from "./AskLocationDialog";
 import {Subscription} from "@supabase/supabase-js";
+import NoSSR from 'react-no-ssr';
 
 export default function PlanerCompact() {
 
@@ -206,7 +207,7 @@ export default function PlanerCompact() {
                   Bouldereinheiten sowie Workouts verfolgen. Über die Icons kannst du deine Einheiten abhaken, sofern du Sie erledigt hast.
                   Über das Pfeil-Symbol gelangst du zu deinem detaillierten Wochenplan."
                         >
-                            <InfoIcon/>
+                            <NoSSR><InfoIcon/></NoSSR>
                         </div>
                     </div>
 
@@ -244,7 +245,7 @@ export default function PlanerCompact() {
                                                                 className={`tooltip ${item.day === "Montag" ? 'tooltip-right' : item.day === "Sonntag" ? 'tooltip-left' : 'tooltip-bottom'} tooltip-primary mb-4 z-50`}
                                                                 data-tip={"Workout verpasst: " + item.value}
                                                             >
-                                                                <FailedIcon/>
+                                                                <NoSSR><FailedIcon/></NoSSR>
                                                             </div>
                                                         </div>
                                                     ) : !isDayPast(item) &&
@@ -255,7 +256,7 @@ export default function PlanerCompact() {
                                                                 className={`tooltip ${item.day === "Montag" ? 'tooltip-right' : item.day === "Sonntag" ? 'tooltip-left' : 'tooltip-bottom'} tooltip-primary mb-4 z-50`}
                                                                 data-tip={item.value}
                                                             >
-                                                                <CheckDisabledIcon/>
+                                                                <NoSSR><CheckDisabledIcon/></NoSSR>
                                                             </div>
                                                         </div>
                                                     ) : item.checked ? (
@@ -264,14 +265,14 @@ export default function PlanerCompact() {
                                                                 className={`tooltip ${item.day === "Montag" ? 'tooltip-right' : item.day === "Sonntag" ? 'tooltip-left' : 'tooltip-bottom'} tooltip-primary mb-4 z-50`}
                                                                 data-tip={item.value}
                                                             >
-                                                                <CheckIcon/>
+                                                                <NoSSR><CheckIcon/></NoSSR>
                                                             </div>
                                                         </div>
                                                     ) : !item.checked ? (
                                                         <div
                                                             className={`tooltip ${item.day === "Montag" ? 'tooltip-right' : item.day === "Sonntag" ? 'tooltip-left' : 'tooltip-bottom'} tooltip-primary mb-4`}
                                                             data-tip="Kein Workout geplant">
-                                                            <UnusedIcon/>
+                                                            <NoSSR><UnusedIcon/></NoSSR>
                                                         </div>
                                                     ) : (
                                                         ""
@@ -283,14 +284,14 @@ export default function PlanerCompact() {
                                 </tr>
                                 </tbody>
                             </table>
-                            : <LoadingSpinner/>
+                            : <NoSSR><LoadingSpinner/></NoSSR>
                     }
                     <Link href="/plan">
-                        <ArrowDownIcon/>
+                        <NoSSR><ArrowDownIcon/></NoSSR>
                     </Link>
                 </div>
             </div>
-            <AskLocationDialog newEvent={newEvent}/>
+            <NoSSR><AskLocationDialog newEvent={newEvent}/></NoSSR>
         </main>
     );
 }
