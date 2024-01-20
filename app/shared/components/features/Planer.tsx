@@ -2,11 +2,10 @@ import SupabaseService from "../../api/supabase-service";
 import {Plan} from "../../types/Plan";
 import Toast from "../ui/Toast";
 import Cache from "../../../cache";
-import dynamic from "next/dynamic";
-const LoadingSpinner = dynamic(() => import('@/app/shared/components/ui/LoadingSpinner'), {ssr: false});
-const InfoIcon = dynamic(() => import('@/app/shared/components/ui/icons/InfoIcon'), {ssr: false});
-const TrashIcon = dynamic(() => import('@/app/shared/components/ui/icons/TrashIcon'), {ssr: false});
-const Button = dynamic(() => import('@/app/shared/components/ui/Button'), {ssr: false});
+import {LoadingSpinner} from "../ui/LoadingSpinner";
+import {InfoIcon} from "../ui/icons/InfoIcon";
+import {TrashIcon} from "../ui/icons/TrashIcon";
+import {Button} from "../ui/Button";
 import {Subscription} from "@supabase/supabase-js";
 import {useEffect, useRef, useState} from "react";
 

@@ -11,7 +11,7 @@ type ButtonProps = {
   disabled?: boolean
 }
 
-export default function Button(props: ButtonProps) {
+export function Button(props: ButtonProps) {
 
   function handleClick() {
     props.onClick();

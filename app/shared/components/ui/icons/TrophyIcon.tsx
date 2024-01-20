@@ -2,7 +2,7 @@ type TrophyIconProps = {
   color: string;
 };
 
-export default function TrophyIcon(props: TrophyIconProps) {
+export function TrophyIcon(props: TrophyIconProps) {
   return (
     <svg
       className={`w-5 h-5 ${props.color}`}

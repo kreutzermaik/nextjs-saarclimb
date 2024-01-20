@@ -1,12 +1,11 @@
 "use client";
 
-import dynamic from 'next/dynamic'
-const Footer = dynamic(() => import('./shared/components/features/Footer'), {ssr: false});
-const Header = dynamic(() => import('./shared/components/features/Header'), {ssr: false});
-const Calendar = dynamic(() => import("@/app/shared/components/features/Calendar"), {ssr: false});
-const NotLoggedIn = dynamic(() => import("@/app/shared/components/ui/NotLoggedIn"), {ssr: false});
-const PlanerCompact = dynamic(() => import("@/app/shared/components/features/PlanerCompact"), {ssr: false});
+import Footer from './shared/components/features/Footer'
+import Header from './shared/components/features/Header'
+import Calendar from "@/app/shared/components/features/Calendar";
+import NotLoggedIn from "@/app/shared/components/ui/NotLoggedIn";
 import {useSelector} from "react-redux";
+import PlanerCompact from "@/app/shared/components/features/PlanerCompact";
 import {useState, useEffect} from 'react'
 import {autoLogin} from '@/test/autoLogin';
 

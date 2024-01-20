@@ -1,7 +1,6 @@
 "use client";
 
-import dynamic from "next/dynamic";
-const Auth = dynamic(() => import('@/app/shared/components/features/Auth'), {ssr: false});
+import Auth from "../../shared/components/features/Auth";
 
 export default function Login() {
 

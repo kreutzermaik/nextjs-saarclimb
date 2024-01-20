@@ -1,4 +1,4 @@
-export default function CheckDisabledIcon() {
+export function CheckDisabledIcon() {
   return (
     <svg
       className="w-6 h-6 text-green-500 opacity-30 cursor-pointer"

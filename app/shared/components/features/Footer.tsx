@@ -1,11 +1,10 @@
 "use client";
 
 import {usePathname, useRouter} from 'next/navigation'
-import dynamic from "next/dynamic";
-const MonitorIcon = dynamic(() => import('@/app/shared/components/ui/icons/MonitorIcon'), {ssr: false});
-const UserGroupIcon = dynamic(() => import('@/app/shared/components/ui/icons/UserGroupIcon'), {ssr: false});
-const ToolIcon = dynamic(() => import('@/app/shared/components/ui/icons/ToolIcon'), {ssr: false});
-const DashboardIcon = dynamic(() => import('@/app/shared/components/ui/icons/DashboardIcon'), {ssr: false});
+import {MonitorIcon} from '../ui/icons/MonitorIcon';
+import {UserGroupIcon} from '../ui/icons/UserGroupIcon';
+import {ToolIcon} from '../ui/icons/ToolIcon';
+import {DashboardIcon} from '../ui/icons/DashboardIcon';
 
 export default function Footer() {
 

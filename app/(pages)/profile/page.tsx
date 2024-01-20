@@ -1,20 +1,19 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Session from "@/app/session";
 import SupabaseService from "@/app/shared/api/supabase-service";
-const Footer = dynamic(() => import('@/app/shared/components/features/Footer'), {ssr: false});
-const Header = dynamic(() => import('@/app/shared/components/features/Header'), {ssr: false});
-const NumberAnimation = dynamic(() => import('@/app/shared/components/ui/NumberAnimation'), {ssr: false});
-const ChartVisitedGyms = dynamic(() => import('@/app/shared/components/features/ChartVisitedGyms'), {ssr: false});
-const NotLoggedIn = dynamic(() => import('@/app/shared/components/ui/NotLoggedIn'), {ssr: false});
-const LoadingSpinner = dynamic(() => import('@/app/shared/components/ui/LoadingSpinner'), {ssr: false});
-const Button = dynamic(() => import('@/app/shared/components/ui/Button'), {ssr: false});
+import Footer from "@/app/shared/components/features/Footer";
+import Header from "@/app/shared/components/features/Header";
 import {User} from "@/app/shared/types/User";
 import {setUserImage, setUserPoints} from "@/app/userSlicer";
 import imageCompression from "browser-image-compression";
 import {useEffect, useState} from "react";
 import {useSelector, useDispatch} from "react-redux";
+import NotLoggedIn from "@/app/shared/components/ui/NotLoggedIn";
+import {LoadingSpinner} from "@/app/shared/components/ui/LoadingSpinner";
+import {Button} from "@/app/shared/components/ui/Button";
+import NumberAnimation from "@/app/shared/components/ui/NumberAnimation";
+import ChartVisitedGyms from "@/app/shared/components/features/ChartVisitedGyms";
 
 export default function Profile() {
 

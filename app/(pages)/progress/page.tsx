@@ -1,10 +1,9 @@
 "use client";
 
-import dynamic from "next/dynamic";
-const Footer = dynamic(() => import('@/app/shared/components/features/Footer'), {ssr: false});
-const Header = dynamic(() => import('@/app/shared/components/features/Header'), {ssr: false});
-const ProgressCard = dynamic(() => import('@/app/shared/components/features/ProgressCard'), {ssr: false});
-const NotLoggedIn = dynamic(() => import('@/app/shared/components/ui/NotLoggedIn'), {ssr: false});
+import Footer from "@/app/shared/components/features/Footer";
+import Header from "@/app/shared/components/features/Header";
+import ProgressCard from "@/app/shared/components/features/ProgressCard";
+import NotLoggedIn from "@/app/shared/components/ui/NotLoggedIn";
 import { autoLogin } from "@/test/autoLogin";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";

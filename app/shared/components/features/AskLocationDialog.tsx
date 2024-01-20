@@ -1,7 +1,6 @@
 "use client";
 
-import dynamic from "next/dynamic";
-const Button = dynamic(() => import('@/app/shared/components/ui/Button'), {ssr: false});
+import {Button} from "../ui/Button";
 import SupabaseService from "../../api/supabase-service";
 import {Gym} from "../../types/Gym";
 import Toast from "../ui/Toast";

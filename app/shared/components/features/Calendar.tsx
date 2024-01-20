@@ -5,9 +5,8 @@ import InteractionPlugin from "@fullcalendar/interaction";
 import SupabaseService from "@/app/shared/api/supabase-service";
 import {Event} from "@/app/shared/types/Event";
 import {Subscription} from "@supabase/supabase-js";
-import dynamic from "next/dynamic";
-const LoadingSpinner = dynamic(() => import('@/app/shared/components/ui/LoadingSpinner'), {ssr: false});
-const AddEventDialog = dynamic(() => import('@/app/shared/components/features/AddEventDialog'), {ssr: false});
+import {LoadingSpinner} from "@/app/shared/components/ui/LoadingSpinner";
+import AddEventDialog from "@/app/shared/components/features/AddEventDialog";
 
 export default function Calendar() {
 
