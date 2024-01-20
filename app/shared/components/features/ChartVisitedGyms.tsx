@@ -1,22 +1,15 @@
-"use client";
-
 import * as d3 from "d3";
 import SupabaseService from "../../api/supabase-service";
-import {useEffect, useRef, useState} from "react";
+import {useEffect} from "react";
+
 
 export default function ChartVisitedGyms() {
-    const chartRef = useRef(null);
-
     function setChart(data: any) {
-        if (!chartRef.current) return;
-
-        d3.select(chartRef.current).selectAll("*").remove();
-
         const margin = {top: 20, right: 30, bottom: 40, left: 40};
         const width = 400 - margin.left - margin.right;
         const height = 300 - margin.top - margin.bottom;
 
-        const svg = d3.select(chartRef.current)
+        const svg = d3.select('#chart')
             .append('svg')
             .attr('width', width + margin.left + margin.right)
             .attr('height', height + margin.top + margin.bottom)
@@ -91,6 +84,6 @@ export default function ChartVisitedGyms() {
     }, []);
 
     return (
-        <div ref={chartRef}></div>
+        <div id="chart"></div>
     )
 }
