@@ -1,8 +1,9 @@
 "use client";
 
-import Footer from "@/app/shared/components/features/Footer";
-import Header from "@/app/shared/components/features/Header";
-import LeaderBoard from "@/app/shared/components/features/LeaderBoard";
+import dynamic from "next/dynamic";
+const Footer = dynamic(() => import('@/app/shared/components/features/Footer'), {ssr: false});
+const Header = dynamic(() => import('@/app/shared/components/features/Header'), {ssr: false});
+const LeaderBoard = dynamic(() => import('@/app/shared/components/features/LeaderBoard'), {ssr: false});
 
 export default function Board() {
 

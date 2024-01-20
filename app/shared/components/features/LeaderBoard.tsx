@@ -6,8 +6,9 @@ import {Gym} from "../../types/Gym";
 import {User} from "../../types/User";
 import {Point} from "../../types/Point";
 import {setCurrentGym} from "@/app/userSlicer";
-import {TrophyIcon} from "../ui/icons/TrophyIcon";
-import {LoadingSpinner} from "../ui/LoadingSpinner";
+import dynamic from "next/dynamic";
+const TrophyIcon = dynamic(() => import('@/app/shared/components/ui/icons/TrophyIcon'), {ssr: false});
+const LoadingSpinner = dynamic(() => import('@/app/shared/components/ui/LoadingSpinner'), {ssr: false});
 
 export default function LeaderBoard() {
 

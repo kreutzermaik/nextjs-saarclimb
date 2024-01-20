@@ -1,4 +1,4 @@
-export function ToolIcon() {
+export default function ToolIcon() {
   return (
     <svg
       className="w-5"

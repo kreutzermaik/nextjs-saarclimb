@@ -1,6 +1,7 @@
 "use client";
 
-import {Button} from "../ui/Button";
+import dynamic from "next/dynamic";
+const Button = dynamic(() => import('@/app/shared/components/ui/Button'), {ssr: false});
 import Toast from "@/app/shared/components/ui/Toast";
 import {useEffect, useRef, useState} from "react";
 import {Gym} from "../../types/Gym";

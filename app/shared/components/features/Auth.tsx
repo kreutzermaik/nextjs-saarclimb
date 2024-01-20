@@ -2,7 +2,8 @@
 
 import {useState} from "react";
 import {useRouter} from "next/navigation";
-import {Button} from "../ui/Button";
+import dynamic from "next/dynamic";
+const Button = dynamic(() => import('@/app/shared/components/ui/Button'), {ssr: false});
 import Link from "next/link";
 import Cache from "@/app/cache";
 import {supabase} from "@/supabase";

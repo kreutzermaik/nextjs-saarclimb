@@ -1,11 +1,12 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import {supabase} from "@/supabase";
 import {useRouter} from "next/navigation";
-import Header from "@/app/shared/components/features/Header";
-import {HelpIcon} from "@/app/shared/components/ui/icons/HelpIcon";
-import {Button} from "@/app/shared/components/ui/Button";
-import Footer from "@/app/shared/components/features/Footer";
+const Footer = dynamic(() => import('@/app/shared/components/features/Footer'), {ssr: false});
+const Header = dynamic(() => import('@/app/shared/components/features/Header'), {ssr: false});
+const HelpIcon = dynamic(() => import('@/app/shared/components/ui/icons/HelpIcon'), {ssr: false});
+const Button = dynamic(() => import('@/app/shared/components/ui/Button'), {ssr: false});
 import {useDispatch} from "react-redux";
 import {setUserImage, setUserPoints, logout, setCurrentGym} from "@/app/userSlicer";
 import { Gym } from "@/app/shared/types/Gym";

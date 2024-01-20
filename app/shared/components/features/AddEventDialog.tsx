@@ -1,4 +1,5 @@
-import {Button} from "@/app/shared/components/ui/Button";
+import dynamic from "next/dynamic";
+const Button = dynamic(() => import('@/app/shared/components/ui/Button'), {ssr: false});
 import SupabaseService from "@/app/shared/api/supabase-service";
 import Session from "@/app/session";
 import {Event} from "@/app/shared/types/Event";

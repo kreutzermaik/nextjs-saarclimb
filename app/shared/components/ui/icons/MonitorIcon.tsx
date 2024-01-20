@@ -1,4 +1,4 @@
-export function MonitorIcon() {
+export default function MonitorIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

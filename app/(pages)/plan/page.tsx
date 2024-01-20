@@ -1,10 +1,11 @@
 "use client";
 
-import Footer from "@/app/shared/components/features/Footer";
-import Header from "@/app/shared/components/features/Header";
-import Planer from "@/app/shared/components/features/Planer";
+import dynamic from "next/dynamic";
+const Footer = dynamic(() => import('@/app/shared/components/features/Footer'), {ssr: false});
+const Header = dynamic(() => import('@/app/shared/components/features/Header'), {ssr: false});
+const Planer = dynamic(() => import('@/app/shared/components/features/Planer'), {ssr: false});
+const NotLoggedIn = dynamic(() => import('@/app/shared/components/ui/NotLoggedIn'), {ssr: false});
 import {useSelector} from "react-redux";
-import NotLoggedIn from "../../shared/components/ui/NotLoggedIn";
 import {useState, useEffect} from 'react'
 
 export default function Plan() {

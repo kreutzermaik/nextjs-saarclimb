@@ -1,4 +1,4 @@
-export function UserGroupIcon() {
+export default function UserGroupIcon() {
   return (
     <svg
       className="w-5"
