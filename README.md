@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SaarClimb - Next.js
 
-## Getting Started
+> 👷‍♀️In dieser README wird die Architektur des Projektes erklärt
 
-First, run the development server:
+## 📄 Allgemein
+- Dieses Projekt entsteht im Rahmen meiner Masterthesis
+- Hierfür wird eine Web-App entwickelt, die Boulderer und Sportler beim Planen und Dokumentieren von Klettertouren unterstützt
+- Die App wird in den dreien JavaScript Meta-Frameworks [SvelteKit](https://kit.svelte.dev/), [SolidStart](https://start.solidjs.com/getting-started/what-is-solidstart) und [Next.js](https://nextjs.org/) entwickelt und analysiert
+- SaarClimb ist eine PWA (Progressive Web App)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 💻 Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Die Basis bildet das Meta-Framework [SvelteKit](https://kit.svelte.dev/)
+- Die Komponenten werden entsprechend mit TypeScript und HTML umgesetzt
+- Die Styles werden mit [TailwindCSS](https://tailwindcss.com/) geschrieben
+- Dynamische Datenanzeige wird durch die _Backend as a Service_ Plattform [Supabase](https://supabase.io/) realisiert
+- Dort stehen eine PostgreSQL Datenbank sowie ein Storage für Dateien und Möglichkeiten zur Authentifizierung zur Verfügung
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🗂️ Übersicht über die Komponenten
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Die Komponenten befinden sich im Ordner `./app/shared/components/`
+- Diese sind unterschieden in `Features` und `UI-Elemente`
+- Die Seiten befinden sich im Ordner `./app/(pages)/`
 
-## Learn More
+## ⌘ Commands
 
-To learn more about Next.js, take a look at the following resources:
+| Command           | Action                                          |
+|:------------------|:------------------------------------------------|
+| `npm install`     | Abhängigkeiten installieren                     |
+| `npm run dev`     | Startet lokalen Server `http://localhost:8080/` |
+| `npm run build`   | Bauprozess für die Produktion                   |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🖥️ CI/CD
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- GitHub Action Workflows werden für automatisierte Tests verwendet
 
-## Deploy on Vercel
+## 📝 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[MIT](https://choosealicense.com/licenses/mit/)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 📧 Kontakt
+
+- [GitHub](https://github.com/kreutzermaik)
+- [LinkedIn](https://linkedin.com/in/maik-kreutzer-889a79197)
