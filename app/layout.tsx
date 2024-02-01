@@ -5,6 +5,7 @@ import ReduxProvider from './ReduxProvider';
 export const metadata: Metadata = {
     title: 'SaarClimb',
     description: 'Die App für Boulderer im Saarland',
+    manifest: '/manifest.json',
 }
 
 export default function RootLayout({children}: { children: React.ReactNode }) {
