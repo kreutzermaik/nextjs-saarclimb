@@ -219,7 +219,7 @@ export default function PlanerCompact() {
                                     {
                                         plan.map((day: any) => {
                                             return (
-                                                <th className="bg-white text-black">
+                                                <th key={day.day} className="bg-white text-black">
                                                     <div onClick={() => showPlannedExercise(day)}
                                                          className={day.value === '' ? 'cursor-default' : 'cursor-pointer'}>
                                                         {day.day.slice(0, 2)}
@@ -235,7 +235,7 @@ export default function PlanerCompact() {
                                     {
                                         plan.map((item: any) => {
                                             return (
-                                                <td className="bg-white px-3 py-2">
+                                                <td key={item.day} className="bg-white px-3 py-2">
                                                     {isDayPast(item) &&
                                                     !item.checked &&
                                                     item.value !== "" ? (

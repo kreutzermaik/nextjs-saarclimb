@@ -237,7 +237,7 @@ export default function LeaderBoard() {
                         {
                             getSortedUsers()?.map((user, i) => {
                                 return (
-                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                    <tr key={user.boardId} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                         <td className="px-3 py-2 w-1/12">
                                             {i === 0 ? (
                                                 <TrophyIcon color="text-custom-gold"/>

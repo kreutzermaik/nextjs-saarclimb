@@ -178,7 +178,7 @@ export default function Planer() {
                             {
                                 plan && plan.map((day: any) => {
                                     return (
-                                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <tr key={day.day} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <td className="px-3 py-2">
                                                 <strong>{day.day.slice(0, 2)}</strong>
                                             </td>
